@@ -1,0 +1,9 @@
+Flask
+mysql-connector-python
+cryptography
+qiskit
+qiskit-aer
+liboqs-python
+matplotlib
+numpy
+pandas

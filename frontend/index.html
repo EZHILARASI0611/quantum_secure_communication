@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        QSC-BB84 | Quantum-Safe Communication
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #0f172a;
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 5%;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: #1e3a8a;
+            color: white;
+
+            text-align: center;
+
+            padding: 55px 20px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 17px;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            font-size: 19px;
+        }
+
+        .value {
+            font-size: 27px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .secure {
+            color: #16a34a;
+        }
+
+        .danger {
+            color: #dc2626;
+        }
+
+        /* SECURITY TEST */
+
+        .test-section {
+
+            background: white;
+
+            margin-top: 30px;
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.08);
+        }
+
+        .test-section h2 {
+            margin-bottom: 10px;
+        }
+
+        .test-section p {
+            color: #64748b;
+        }
+
+        button {
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            padding: 14px 32px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        /* RESULT */
+
+        #result {
+
+            margin-top: 25px;
+
+            padding: 22px;
+
+            background: #f8fafc;
+
+            border-radius: 8px;
+
+            text-align: left;
+        }
+
+        /* FOOTER */
+
+        .footer {
+
+            margin-top: 50px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #0f172a;
+
+            color: #cbd5e1;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            QSC-BB84
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#dashboard">
+                Dashboard
+            </a>
+
+            <a href="#bb84">
+                BB84
+            </a>
+
+            <a href="#pqc">
+                PQC
+            </a>
+
+            <a href="#security">
+                Security
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero"
+             id="dashboard">
+
+        <h1>
+            Quantum-Safe Secure Communication
+        </h1>
+
+        <p>
+            BB84 Quantum Key Distribution +
+            Post-Quantum Cryptography +
+            AES-GCM
+        </p>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <!-- SECURITY CARDS -->
+
+        <div class="cards">
+
+
+            <!-- BB84 -->
+
+            <div class="card"
+                 id="bb84">
+
+                <h2>
+                    BB84
+                </h2>
+
+                <div class="value"
+                     id="qubits">
+
+                    --
+
+                </div>
+
+                <p>
+                    Qubits
+                </p>
+
+                <p class="status"
+                   id="bb84Status">
+
+                    Waiting
+
+                </p>
+
+            </div>
+
+
+            <!-- QBER -->
+
+            <div class="card">
+
+                <h2>
+                    QBER
+                </h2>
+
+                <div class="value"
+                     id="qber">
+
+                    --
+
+                </div>
+
+                <p>
+                    Quantum Bit Error Rate
+                </p>
+
+                <p class="status"
+                   id="qberStatus">
+
+                    Waiting
+
+                </p>
+
+            </div>
+
+
+            <!-- PQC -->
+
+            <div class="card"
+                 id="pqc-card">
+
+                <h2>
+                    Post-Quantum Crypto
+                </h2>
+
+                <div class="value"
+                     id="pqc">
+
+                    --
+
+                </div>
+
+                <p class="status"
+                   id="pqcStatus">
+
+                    Waiting
+
+                </p>
+
+            </div>
+
+
+            <!-- AES -->
+
+            <div class="card">
+
+                <h2>
+                    Encryption
+                </h2>
+
+                <div class="value"
+                     id="encryption">
+
+                    --
+
+                </div>
+
+                <p class="status"
+                   id="encryptionStatus">
+
+                    Waiting
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY TEST -->
+
+        <section class="test-section"
+                 id="security">
+
+            <h2>
+                Security Verification
+            </h2>
+
+            <p>
+                Execute the complete quantum-safe
+                communication workflow.
+            </p>
+
+            <button onclick="runSecurityTest()">
+
+                RUN SECURITY TEST
+
+            </button>
+
+
+            <div id="result">
+
+                System ready.
+                Click the button to begin.
+
+            </div>
+
+        </section>
+        <!-- QUANTUM CHANNEL EXPERIMENT -->
+
+
+<section class="test-section">
+
+    <h2>
+        Quantum Channel Experiment
+    </h2>
+
+    <p>
+        Simulate Eve interception and channel noise
+        and observe their effect on QBER.
+    </p>
+
+    <br>
+
+    <label>
+        <b>Eve Interception Rate (%)</b>
+    </label>
+
+    <br><br>
+
+    <input
+        type="range"
+        id="eveRate"
+        min="0"
+        max="100"
+        value="50"
+        oninput="updateExperimentValues()"
+    >
+
+    <span id="eveValue">
+        50%
+    </span>
+
+    <br><br>
+
+    <label>
+        <b>Channel Noise Rate (%)</b>
+    </label>
+
+    <br><br>
+
+    <input
+        type="range"
+        id="noiseRate"
+        min="0"
+        max="20"
+        value="5"
+        oninput="updateExperimentValues()"
+    >
+
+    <span id="noiseValue">
+        5%
+    </span>
+
+    <br><br>
+
+    <button onclick="runExperiment(); updateQBERChart();">
+    RUN EXPERIMENT
+</button>
+
+    <div id="experimentResult">
+
+        Select Eve and noise rates,
+        then run the experiment.
+
+    </div>
+
+</section>
+<!-- QBER VISUALIZATION -->
+
+<section class="test-section">
+
+    <h2>QBER Visualization</h2>
+
+    <p>
+        This graph shows how QBER changes with
+        Eve interception and channel noise.
+    </p>
+
+    <br>
+
+    <canvas id="qberChart"></canvas>
+
+</section>
+
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            QSC-BB84 |
+            Quantum-Safe Secure Communication System
+        </p>
+
+        <p>
+            BB84 • ML-KEM-768 • AES-GCM
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        async function runSecurityTest() {
+
+            const result =
+                document.getElementById("result");
+
+            result.innerHTML =
+                "⏳ Running security test...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/api/security-test"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                /* BB84 */
+
+                if (data.bb84) {
+
+                    document.getElementById(
+                        "qubits"
+                    ).innerText =
+                        data.bb84.qubits;
+
+
+                    document.getElementById(
+                        "bb84Status"
+                    ).innerText =
+                        "✓ ACTIVE";
+
+
+                    document.getElementById(
+                        "bb84Status"
+                    ).className =
+                        "status secure";
+
+
+                    /* QBER */
+
+                    document.getElementById(
+                        "qber"
+                    ).innerText =
+                        data.bb84.qber_percent +
+                        "%";
+
+
+                    if (
+                        data.bb84.qber_percent < 11
+                    ) {
+
+                        document.getElementById(
+                            "qberStatus"
+                        ).innerText =
+                            "✓ SECURE";
+
+
+                        document.getElementById(
+                            "qberStatus"
+                        ).className =
+                            "status secure";
+
+                    }
+
+                }
+
+
+                /* PQC */
+
+                if (data.pqc) {
+
+                    document.getElementById(
+                        "pqc"
+                    ).innerText =
+                        data.pqc.algorithm;
+
+
+                    document.getElementById(
+                        "pqcStatus"
+                    ).innerText =
+                        "✓ SUCCESS";
+
+
+                    document.getElementById(
+                        "pqcStatus"
+                    ).className =
+                        "status secure";
+
+                }
+
+
+                /* AES */
+
+                if (data.encryption) {
+
+                    document.getElementById(
+                        "encryption"
+                    ).innerText =
+                        data.encryption.algorithm;
+
+
+                    document.getElementById(
+                        "encryptionStatus"
+                    ).innerText =
+                        "✓ SUCCESS";
+
+
+                    document.getElementById(
+                        "encryptionStatus"
+                    ).className =
+                        "status secure";
+
+                }
+
+
+                /* FINAL RESULT */
+
+                if (
+                    data.status === "SECURE"
+                ) {
+
+                    result.innerHTML =
+
+                        "<h3 class='secure'>" +
+                        "✓ COMMUNICATION SECURE" +
+                        "</h3><br>" +
+
+                        "<p><b>BB84 Qubits:</b> " +
+                        data.bb84.qubits +
+                        "</p>" +
+
+                        "<p><b>QBER:</b> " +
+                        data.bb84.qber_percent +
+                        "%</p>" +
+
+                        "<p><b>PQC:</b> " +
+                        data.pqc.algorithm +
+                        "</p>" +
+
+                        "<p><b>Encryption:</b> " +
+                        data.encryption.algorithm +
+                        "</p>" +
+
+                        "<p><b>Message Verification:</b> " +
+                        data.verification.message_match +
+                        "</p>";
+
+                }
+
+
+            }
+
+            catch (error) {
+
+                result.innerHTML =
+
+                    "<h3 class='danger'>" +
+                    "Connection Error" +
+                    "</h3><br>" +
+
+                    "<p>" +
+                    "Make sure Flask is running." +
+                    "</p>";
+
+                console.error(error);
+
+            }
+
+        }
+function updateExperimentValues() {
+
+    const eve =
+        document.getElementById("eveRate").value;
+
+    const noise =
+        document.getElementById("noiseRate").value;
+
+    document.getElementById(
+        "eveValue"
+    ).innerText = eve + "%";
+
+    document.getElementById(
+        "noiseValue"
+    ).innerText = noise + "%";
+}
+
+
+async function runExperiment() {
+
+    const eve =
+        document.getElementById("eveRate").value;
+
+    const noise =
+        document.getElementById("noiseRate").value;
+
+    const result =
+        document.getElementById(
+            "experimentResult"
+        );
+
+    result.innerHTML =
+        "⏳ Running experiment...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/api/experiment?eve="
+                + eve
+                + "&noise="
+                + noise
+            );
+
+
+        const data =
+            await response.json();
+
+
+        const qber =
+            data.results.qber_percent;
+
+        const keyLength =
+            data.results.key_length;
+
+        const intercepted =
+            data.results.eve_intercepted;
+
+        const noiseErrors =
+            data.results.noise_errors;
+
+        const status =
+            data.security.status;
+
+
+        let statusClass =
+            status === "SECURE"
+            ? "secure"
+            : "danger";
+
+
+        result.innerHTML =
+
+            "<h3 class='" +
+            statusClass +
+            "'>" +
+
+            "Security Status: " +
+            status +
+
+            "</h3><br>" +
+
+            "<p><b>Qubits:</b> " +
+            data.experiment.qubits +
+            "</p>" +
+
+            "<p><b>Eve Interception:</b> " +
+            eve +
+            "%</p>" +
+
+            "<p><b>Eve Intercepted:</b> " +
+            intercepted +
+            "</p>" +
+
+            "<p><b>Channel Noise:</b> " +
+            noise +
+            "%</p>" +
+
+            "<p><b>Noise Errors:</b> " +
+            noiseErrors +
+            "</p>" +
+
+            "<p><b>QBER:</b> " +
+            qber +
+            "%</p>" +
+
+            "<p><b>Final Key Length:</b> " +
+            keyLength +
+            "</p>" +
+
+            "<p><b>Security Threshold:</b> " +
+            data.security.threshold_percent +
+            "%</p>";
+
+    }
+
+    catch (error) {
+
+        result.innerHTML =
+
+            "<h3 class='danger'>" +
+            "Experiment Error" +
+            "</h3><br>" +
+
+            "<p>" +
+            "Make sure Flask is running." +
+            "</p>";
+
+        console.error(error);
+
+    }
+
+}
+let qberChart = null;
+
+
+async function updateQBERChart() {
+
+    const eveValues = [
+        0,
+        25,
+        50,
+        75,
+        100
+    ];
+
+    const noise =
+        document.getElementById("noiseRate").value;
+
+    const qberValues = [];
+
+
+    for (const eve of eveValues) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/experiment?eve="
+                    + eve
+                    + "&noise="
+                    + noise
+                );
+
+            const data =
+                await response.json();
+
+            qberValues.push(
+                data.results.qber_percent
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Chart error:",
+                error
+            );
+
+            qberValues.push(0);
+
+        }
+    }
+
+
+    const canvas =
+        document.getElementById(
+            "qberChart"
+        );
+
+
+    if (qberChart !== null) {
+
+        qberChart.destroy();
+
+    }
+
+
+    qberChart =
+        new Chart(
+            canvas,
+            {
+
+                type: "line",
+
+                data: {
+
+                    labels: [
+                        "0%",
+                        "25%",
+                        "50%",
+                        "75%",
+                        "100%"
+                    ],
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "QBER (%)",
+
+                            data:
+                                qberValues,
+
+                            tension:
+                                0.3,
+
+                            borderWidth:
+                                2,
+
+                            pointRadius:
+                                5
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive:
+                        true,
+
+                    plugins: {
+
+                        title: {
+
+                            display:
+                                true,
+
+                            text:
+                                "QBER vs Eve Interception"
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            title: {
+
+                                display:
+                                    true,
+
+                                text:
+                                    "Eve Interception Rate"
+
+                            }
+
+                        },
+
+                        y: {
+
+                            beginAtZero:
+                                true,
+
+                            title: {
+
+                                display:
+                                    true,
+
+                                text:
+                                    "QBER (%)"
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+}
+    </script>
+<!-- SAVED EXPERIMENT HISTORY -->
+
+<section class="container" style="margin-top: 40px; margin-bottom: 40px;">
+
+    <div class="card">
+
+        <h2>Saved Experiment History</h2>
+
+        <p>
+            Experiment results stored in the MySQL database.
+        </p>
+
+        <button onclick="loadExperimentHistory()">
+            LOAD SAVED EXPERIMENTS
+        </button>
+
+        <div style="overflow-x: auto; margin-top: 20px;">
+
+            <table id="experimentHistoryTable"
+                   style="width: 100%; border-collapse: collapse;">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Qubits</th>
+                        <th>Eve %</th>
+                        <th>Noise %</th>
+                        <th>Eve Intercepted</th>
+                        <th>Noise Errors</th>
+                        <th>QBER %</th>
+                        <th>Key Length</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="experimentHistoryBody">
+
+                    <tr>
+                        <td colspan="10" style="text-align:center;">
+                            Click "LOAD SAVED EXPERIMENTS"
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+async function loadExperimentHistory() {
+
+    const tableBody =
+        document.getElementById("experimentHistoryBody");
+
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="10" style="text-align:center;">
+                Loading experiments...
+            </td>
+        </tr>
+    `;
+
+    try {
+
+        const response =
+            await fetch("/api/experiments");
+
+        const data =
+            await response.json();
+
+        if (data.status !== "SUCCESS") {
+
+            throw new Error(
+                data.message || "Unable to load experiments"
+            );
+
+        }
+
+        if (data.count === 0) {
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="10" style="text-align:center;">
+                        No experiments saved yet.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        tableBody.innerHTML = "";
+
+        data.experiments.forEach(function(experiment) {
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>${experiment.id}</td>
+
+                <td>${experiment.qubits}</td>
+
+                <td>${experiment.eve_rate_percent}%</td>
+
+                <td>${experiment.noise_rate_percent}%</td>
+
+                <td>${experiment.eve_intercepted}</td>
+
+                <td>${experiment.noise_errors}</td>
+
+                <td>${experiment.qber_percent}%</td>
+
+                <td>${experiment.key_length}</td>
+
+                <td>
+                    <strong>
+                        ${experiment.security_status}
+                    </strong>
+                </td>
+
+                <td>${experiment.created_at}</td>
+
+            `;
+
+            tableBody.appendChild(row);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error("History loading error:", error);
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="10"
+                    style="text-align:center;">
+                    Error loading experiment history.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
