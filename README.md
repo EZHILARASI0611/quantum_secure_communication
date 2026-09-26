@@ -501,3 +501,9 @@ Possible future improvements include:
 This project demonstrates the integration of **quantum key distribution, post-quantum cryptography, and classical authenticated encryption** in a single experimental security system.
 
 It is intended for academic learning, experimentation, and demonstration of quantum-safe communication concepts.
+README Architecture Section
+System Architecture
+
+The Quantum-Safe Secure Communication System combines BB84 quantum key distribution, simulated attack and channel-noise analysis, QBER-based security checking, ML-KEM-768 post-quantum key exchange, AES-GCM encryption, Flask web services, and MySQL experiment storage.
+
+
